@@ -11,11 +11,15 @@ Hardware device for easy password transfer from an air-gapped trusted machine wi
 
 1. Connect the Arduino Micro to the trusted machine via USB.
 2. Open the password manager and copy the selected password to the clipboard.
-3. Execute the Python script and wait for the notification "OK: Copied to EEPROM". The password is now saved to the EEPROM of the Arduino.
+3. Execute the Python script and wait for the notification "OK: Copied to EEPROM". The password is saved to the EEPROM of the Arduino, and LED is turned on.
 4. Disconnect the Arduino Micro from the trusted machine.
 5. Open the desired password prompt on the target machine and place the cursor in the respective text field.
-6. Connect the Arduino Micro to the target machine. It will "type" the password (as an HID device) and then remove it from the EEPROM.
+6. Connect the Arduino Micro to the target machine. It will "type" the password (as an HID device) and then clear the EEPROM. LED is turned off, when EEPROM is cleared.
 
 ## IMPORTANT
 
 Data is stored in the Arduino EEPROM in plain text. It is cleared after each "typing", but between "storing" and "typing" it is in non-volatile memory.
+
+## Future work
+
+TODO: implement handshake before sending password to avoid disclosure due to wrong serial device name
