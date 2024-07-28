@@ -1,17 +1,21 @@
-# usbclipboard
-Arduino Micro as a clipboard to transfer passwords from "trusted" machine to target.
+# Project description: usbclipboard
 
-# Preparation
-1. Flash Arduino Micro (Mega32U4) with the code
-2. Copy Python script (push.py) to the trusted machine with password manager and create launcher, if needed
+Hardware device for easy password transfer from an air-gapped trusted machine with a password manager to a target device. For the "source" device, it looks like a UART terminal (9600 baud rate), which expects a "\n"-terminated password string. For the "target" device, it looks like an HID keyboard.
 
-# Usage
-1. Connect Arduino Micro to USB of trusted machine
-2. Open password manager and copy selected password to clipboard
-3. Execute python script and get notification "OK: Copied to EEPROM". Now password is saved to EEPROM of Arduino
-4. Disconnect Arduino Micro from trusted machine
-5. Open desired password prompt on target machine and set cursor to respective text field
-6. Connect Arduino Micro to target machine. It will "type" password (as HID device) and remove it from EEPROM
+## Preparation
 
-# IMPORTANT
-Data is stored in Arduino EEPROM in plain text. It is cleared after each "typing", but between "storing" and "typing" it is in non-volatile memory.
+1. Flash an Arduino Micro (Mega32U4) with the appropriate firmware.
+2. Copy the Python script (`push.py`) to the trusted machine with the password manager and adjust the serial device name, if needed.
+
+## Usage
+
+1. Connect the Arduino Micro to the trusted machine via USB.
+2. Open the password manager and copy the selected password to the clipboard.
+3. Execute the Python script and wait for the notification "OK: Copied to EEPROM". The password is now saved to the EEPROM of the Arduino.
+4. Disconnect the Arduino Micro from the trusted machine.
+5. Open the desired password prompt on the target machine and place the cursor in the respective text field.
+6. Connect the Arduino Micro to the target machine. It will "type" the password (as an HID device) and then remove it from the EEPROM.
+
+## IMPORTANT
+
+Data is stored in the Arduino EEPROM in plain text. It is cleared after each "typing", but between "storing" and "typing" it is in non-volatile memory.
