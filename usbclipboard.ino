@@ -30,8 +30,16 @@ void loop() {
   }
   PWD = Serial.readStringUntil('\n');
   if (PWD.length() > 0) {
-      writePWDToEEPROM(PWD);
-      digitalWrite(ledPin, HIGH);
+      if (PWD == "######CLIP?######") { 
+        // handshake reply
+        Serial.write("board");
+      } 
+      else {
+          writePWDToEEPROM(PWD);
+          digitalWrite(ledPin, HIGH);
+          // ACK
+          Serial.write("gotit");
+      }
   }
 }
 
